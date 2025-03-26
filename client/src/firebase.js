@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB4RqfSGKvI2Px-H22lQMdC_5GDJmcJ9iM",
-    authDomain: "codepostauth.firebaseapp.com",
-    projectId: "codepostauth",
-    storageBucket: "codepostauth.firebasestorage.app",
-    messagingSenderId: "807814683112",
-    appId: "1:807814683112:web:ae74cfe8fec9a58d5bac5d"
-  };
+  apiKey: "AIzaSyAhEGC0bxwRKEbRFQFc99FAzYhL2rhWhFg",
+  authDomain: "astute-impulse-447907-u1.firebaseapp.com",
+  projectId: "astute-impulse-447907-u1",
+  storageBucket: "astute-impulse-447907-u1.firebasestorage.app",
+  messagingSenderId: "531778193935",
+  appId: "1:531778193935:web:4125d2c951dc35df7ff17a"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
