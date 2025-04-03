@@ -1,7 +1,7 @@
 import { auth, googleProvider, githubProvider } from "../firebase";
 import { signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { FaGoogle, FaGithub, FaCode, FaLock, FaEnvelope } from 'react-icons/fa';
+import { FaGoogle,FaPhone, FaUser,FaGithub, FaCode, FaLock, FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,9 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState('');
+const [phoneNumber, setPhoneNumber] = useState('');
+
 
   // Email Login
   const handleEmailLogin = async (e) => {
@@ -84,6 +87,13 @@ const Login = () => {
           break;
         default:
           errorMessage = error.message;
+
+          await updateProfile(userCredential.user, {
+            displayName: username,
+            phoneNumber: phoneNumber
+          });
+          setUser({ ...userCredential.user, displayName: username, phoneNumber });
+          
       }
       
       toast.error(errorMessage);
@@ -91,6 +101,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  
 
   // Google login
   const handleGoogleLogin = async () => {
@@ -221,7 +232,41 @@ const Login = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
+                  
                 </div>
+                {!isLogin && (
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+      <FaUser className="text-gray-400" />
+    </div>
+    <input
+      type="text"
+      required
+      className="appearance-none pl-10 rounded-lg block w-full px-3 py-3 border"
+      placeholder="Username"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+    />
+  </div>
+)}
+
+{!isLogin && (
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+    <FaPhone className="text-gray-400 transform rotate-90" />
+
+    </div>
+    <input
+      type="tel"
+      className="appearance-none pl-10 rounded-lg block w-full px-3 py-3 border"
+      placeholder="Phone Number"
+      value={phoneNumber}
+      onChange={(e) => setPhoneNumber(e.target.value)}
+    />
+  </div>
+)}
+
+                
 
                 {/* Remember me / Forgot password row */}
                 <div className="flex items-center justify-between">
